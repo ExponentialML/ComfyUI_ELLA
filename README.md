@@ -19,10 +19,24 @@ Example: `ComfUI/models/ella/model_file`
 
 2. Create a folder called `t5_model`. Navigate to that folder (you must be in that directory), and `git clone https://huggingface.co/google/flan-t5-xl` to download the t5 model. If you don't wish to use git, you can simply navigate to that folder, and download the corresponding model directory.
 
-## Custom Node
+## Installation
 
 To install, simply navigate to `custom_nodes`, and inside that directory, do `git clone https://github.com/ExponentialML/ComfyUI_ELLA.git`
 
-## Extra Notes
+To get started quickly, a workflow is provided in the workflow directory.
 
-All conditioning nodes and prompt weighting should work as intended.
+## Usage
+
+### ELLA Loader
+![image](https://github.com/ExponentialML/ComfyUI_ELLA/assets/59846140/c137008d-64ff-4252-902b-77c43754d70d)
+
+- **ella_model**: The path to the ella checkpoint **file**.
+- **t5_model**: The path to the t5 model **folder**.
+
+### ELLA Text Encode
+
+![image](https://github.com/ExponentialML/ComfyUI_ELLA/assets/59846140/685221ac-b6b9-49c0-81cd-255ed32addc2)
+
+- **ella**: The loaded model using the ELLA Loader.
+- **text**: Conditioning prompt. All weighting and such should be 1:1 with all condiioning nodes.
+- **sigma**: The required sigma for the prompt. It must be the same as the KSampler settings. Without the workflow, initially this will be a float. You can simply right click the node, `convert sigma to input`, then use the `Get Sigma` node.
