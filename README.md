@@ -11,7 +11,9 @@ ComfyUI Implementaion of ELLA: Equip Diffusion Models with LLM for Enhanced Sema
 
 ## Models
 
-These models must be placed in the corresponding directories under `models`. For example: `ComfUI/models/ella`
+These models must be placed in the corresponding directories under `models`.
+
+Example: `ComfUI/models/ella/model_file`
 
 1. Place the ELLA Model under a new folder `ella`: https://huggingface.co/QQGYLab/ELLA/blob/main/ella-sd1.5-tsc-t5xl.safetensors
 
@@ -19,7 +21,7 @@ These models must be placed in the corresponding directories under `models`. For
 
 ## Custom Node
 
-To install, simply navigate to `custom_nodes` and `git clone https://github.com/ExponentialML/ComfyUI_ELLA.git`
+To install, simply navigate to `custom_nodes`, and inside that directory, do `git clone https://github.com/ExponentialML/ComfyUI_ELLA.git`
 
 ## Extra Notes
 
