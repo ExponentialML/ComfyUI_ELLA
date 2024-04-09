@@ -40,3 +40,10 @@ To get started quickly, a workflow is provided in the workflow directory.
 - **ella**: The loaded model using the ELLA Loader.
 - **text**: Conditioning prompt. All weighting and such should be 1:1 with all condiioning nodes.
 - **sigma**: The required sigma for the prompt. It must be the same as the KSampler settings. Without the workflow, initially this will be a float. You can simply right click the node, `convert sigma to input`, then use the `Get Sigma` node.
+
+### Support
+
+All conditioning nodes should be supported, as well as prompt weighting and ControlNet. 
+
+![image](https://github.com/ExponentialML/ComfyUI_ELLA/assets/59846140/18bb28e4-b886-4c24-9a72-e1ba7dc46998)
+
