@@ -13,11 +13,18 @@ ComfyUI Implementaion of ELLA: Equip Diffusion Models with LLM for Enhanced Sema
 
 These models must be placed in the corresponding directories under `models`.
 
-Example: `ComfUI/models/ella/model_file`
+Example: `ComfyUI/models/ella/model_file`
 
 1. Place the ELLA Model under a new folder `ella`: https://huggingface.co/QQGYLab/ELLA/blob/main/ella-sd1.5-tsc-t5xl.safetensors
 
-2. Create a folder called `t5_model`. Navigate to that folder (you must be in that directory), and `git clone https://huggingface.co/google/flan-t5-xl` to download the t5 model. If you don't wish to use git, you can simply navigate to that folder, and download the corresponding model directory.
+2. Create a folder called `t5_model`. Navigate to that folder (you must be in that directory), and `git clone https://huggingface.co/google/flan-t5-xl` to download the t5 model.
+
+3. If you don't wish to use git, you can dowload each indvididually file manually by creating a folder `t5_model/flan-t5-xl`, then download every file from [here](https://huggingface.co/google/flan-t5-xl/tree/main), although I recommend `git` as it's easier.
+
+In summery, you should have the following model directory structure:
+
+- `ComfyUI/models/ella/ella-sd1.5-tsc-t5xl.safetensors`
+- `ComfyUI/models/t5_model/flan-t5-xl/all_downloaded_t5_models`
 
 ## Installation
 
