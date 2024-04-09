@@ -60,4 +60,6 @@ Thanks to the following for open sourcing. Please follow their respective licens
 
 - ELLA: https://github.com/TencentQQGYLab/ELLA
 
+- Get Sigma Via BNK: https://github.com/BlenderNeko/ComfyUI_Noise
+
 - Diffusers (borrowed timestep modules): https://github.com/huggingface/diffusers
