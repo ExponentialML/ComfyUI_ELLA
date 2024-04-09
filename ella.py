@@ -59,7 +59,7 @@ class ELLATextEncode:
         ella: ELLA = ella_dict.get("ELLA")
         t5: T5TextEmbedder = ella_dict.get("T5")
 
-        cond = t5(text, max_length=128)
+        cond = t5(text)
         cond_ella = ella(cond, timesteps=torch.from_numpy(sigma))
         
         return ([[cond_ella, {"pooled_output": cond_ella}]], ) # Output twice as we don't use pooled output
