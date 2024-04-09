@@ -7,13 +7,17 @@ ComfyUI Implementaion of ELLA: Equip Diffusion Models with LLM for Enhanced Sema
 > [!NOTE]  
 > As per the ELLA developers / researchers, only the SD 1.5 checkpoint is released.
 
-# Quick Start Guide
+# Installation
+
+To install, simply navigate to `custom_nodes`, and inside that directory, do `git clone https://github.com/ExponentialML/ComfyUI_ELLA.git`
 
 ## Models
 
 These models must be placed in the corresponding directories under `models`.
 
 Example: `ComfyUI/models/ella/model_file`
+
+The directories should be created automatically. If they are not, please create them manually.
 
 1. Place the ELLA Model under a new folder `ella`: https://huggingface.co/QQGYLab/ELLA/blob/main/ella-sd1.5-tsc-t5xl.safetensors
 
@@ -26,13 +30,11 @@ In summary, you should have the following model directory structure:
 - `ComfyUI/models/ella/ella-sd1.5-tsc-t5xl.safetensors`
 - `ComfyUI/models/t5_model/flan-t5-xl/all_downloaded_t5_models`
 
-# Installation
+# Usage
 
-To install, simply navigate to `custom_nodes`, and inside that directory, do `git clone https://github.com/ExponentialML/ComfyUI_ELLA.git`
+## Workflow
 
 To get started quickly, a workflow is provided in the workflow directory.
-
-# Usage
 
 ## ELLA Loader
 ![image](https://github.com/ExponentialML/ComfyUI_ELLA/assets/59846140/c137008d-64ff-4252-902b-77c43754d70d)

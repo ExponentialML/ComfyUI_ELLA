@@ -9,6 +9,15 @@ from .ella_model.model import ELLA, T5TextEmbedder
 folder_names_and_paths["ella"] = ([os.path.join(models_dir, "ella")], supported_pt_extensions)
 folder_names_and_paths["t5_model"] = ([os.path.join(models_dir, "t5_model")],[])
 
+for i, f_path in enumerate([folder_names_and_paths["t5_model"], folder_names_and_paths["ella"]]):
+    f_path = f_path[0][0]
+
+    if i == 0:
+        f_path = f_path + "/flan-t5-xl"
+        
+    if not os.path.exists(f_path):
+        os.makedirs(f_path, exist_ok=True)
+
 # Borrowed from https://github.com/BlenderNeko/ComfyUI_Noise Until patch update.
 class GetSigma:
     @classmethod
