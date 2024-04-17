@@ -80,12 +80,12 @@ class ELLATextEncode:
         return {
             "required": {
                 "text": ("STRING", {"multiline": True}), 
-                "manual_timestep": ("FLOAT", {"default": 800}, ),
-                "sigmas": ("SIGMAS", ),
+                "manual_timestep": ("INT", {"default": 0}, ),
                 "ella": ("ELLA", ),
             },
             "optional": {
                 "model": ("MODEL",),
+                "sigmas": ("SIGMAS", ),
             }
         }
 
@@ -94,15 +94,20 @@ class ELLATextEncode:
 
     CATEGORY = "ella/conditioning"
 
-    def encode(self, text, ella: dict, manual_timestep, sigmas, model=None):
+    def encode(self, text, ella: dict, manual_timestep, sigmas=None, model=None):
         ella_dict = ella
         ella: ELLA = ella_dict.get("ELLA")
         t5: T5TextEmbedder = ella_dict.get("T5")
         cond = t5(text)
 
+        if model is None and sigmas is not None:
+            raise ValueError("ELLATextEncode: model must be provided if sigmas are provided")
         if model is not None:
+            if sigmas is None:
+                raise ValueError("ELLATextEncode: sigmas must be provided if model is provided")
             ella_conds = []
             num_sigmas = len(sigmas)
+            print(f"creating ELLA conds for {num_sigmas} sigmas")
 
             for i, sigma in enumerate(sigmas):
                 timestep =  model.model.model_sampling.timestep(sigma)
@@ -121,6 +126,7 @@ class ELLATextEncode:
             return(ella_conds,)
         
         else:
+            print("No model and sigmas provided, using manual timestep for ELLA conditioning")
             manual_timestep = torch.tensor(manual_timestep)
             cond_ella = ella(cond, manual_timestep)
         return ([[cond_ella, {"pooled_output": cond_ella}]], ) # Output twice as we don't use pooled output
