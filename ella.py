@@ -80,8 +80,12 @@ class ELLATextEncode:
         return {
             "required": {
                 "text": ("STRING", {"multiline": True}), 
-                "sigma": ("FLOAT", {"default": 1}, ),
+                "manual_timestep": ("FLOAT", {"default": 800}, ),
+                "sigmas": ("SIGMAS", ),
                 "ella": ("ELLA", ),
+            },
+            "optional": {
+                "model": ("MODEL",),
             }
         }
 
@@ -90,17 +94,37 @@ class ELLATextEncode:
 
     CATEGORY = "ella/conditioning"
 
-    def encode(self, text, ella: dict, sigma):
+    def encode(self, text, ella: dict, manual_timestep, sigmas, model=None):
         ella_dict = ella
-
         ella: ELLA = ella_dict.get("ELLA")
         t5: T5TextEmbedder = ella_dict.get("T5")
-
         cond = t5(text)
-        cond_ella = ella(cond, timesteps=torch.from_numpy(sigma))
+
+        if model is not None:
+            ella_conds = []
+            num_sigmas = len(sigmas)
+
+            for i, sigma in enumerate(sigmas):
+                timestep =  model.model.model_sampling.timestep(sigma)
+                cond_ella = ella(cond, timestep)
+
+                # Calculate start and end percentages based on the position of sigma in the batch
+                start = (i / num_sigmas) # Start percentage is calculated based on the index
+                end = ((i + 1) / num_sigmas) # End percentage is calculated based on the next index
+
+                cond_ella_dict = {
+                    "start_percent": start,
+                    "end_percent": end
+                }
+                ella_conds.append([cond_ella, cond_ella_dict])
+    
+            return(ella_conds,)
         
+        else:
+            manual_timestep = torch.tensor(manual_timestep)
+            cond_ella = ella(cond, manual_timestep)
         return ([[cond_ella, {"pooled_output": cond_ella}]], ) # Output twice as we don't use pooled output
-        
+    
 # A dictionary that contains all nodes you want to export with their names
 # NOTE: names should be globally unique
 NODE_CLASS_MAPPINGS = {
