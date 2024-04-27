@@ -1,3 +1,6 @@
+> [!NOTE]
+> Officially implemented here: https://github.com/TencentQQGYLab/ComfyUI-ELLA
+
 # ComfyUI_ELLA
 ComfyUI Implementaion of ELLA: Equip Diffusion Models with LLM for Enhanced Semantic Alignment
 
