@@ -31,7 +31,7 @@ class GetSigma:
             "end_at_step": ("INT", {"default": 10000, "min": 1, "max": 10000}),
             }}
     
-    RETURN_TYPES = ("FLOAT",)
+    RETURN_TYPES = ("SIGMA",)
     FUNCTION = "calc_sigma"
 
     CATEGORY = "latent/noise"
@@ -80,7 +80,7 @@ class ELLATextEncode:
         return {
             "required": {
                 "text": ("STRING", {"multiline": True}), 
-                "sigma": ("FLOAT", {"default": 1}, ),
+                "sigma": ("SIGMA", ),
                 "ella": ("ELLA", ),
             }
         }
