@@ -64,8 +64,13 @@ class LoadElla:
 
     def load_ella(self, ella_model, t5_model):
         t5_path = os.path.join(models_dir, 't5_model', t5_model)
-        ella_path = os.path.join(models_dir, 'ella', ella_model)
+        repo_id = "ybelkada/flan-t5-xl-sharded-bf16"
+        if not os.path.exists(t5_path):
+            from huggingface_hub import snapshot_download
+            snapshot_download(repo_id=repo_id, local_dir=t5_path, local_dir_use_symlinks=False)
         t5_model = T5TextEmbedder(t5_path).to(self.device, self.dtype)
+        
+        ella_path = os.path.join(models_dir, 'ella', ella_model)
         ella = ELLA().to(self.device, self.dtype)
 
         ella_state_dict = comfy.utils.load_torch_file(ella_path)
